@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repository/!svn/ver/9624/course-picker/trunk/src/webapp/timegrid/scripts/layouts
+END
+property.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repository/!svn/ver/9624/course-picker/trunk/src/webapp/timegrid/scripts/layouts/property.js
+END
+monthly.js
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repository/!svn/ver/9624/course-picker/trunk/src/webapp/timegrid/scripts/layouts/monthly.js
+END
+nday.js
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repository/!svn/ver/9624/course-picker/trunk/src/webapp/timegrid/scripts/layouts/nday.js
+END
+layout.js
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repository/!svn/ver/9624/course-picker/trunk/src/webapp/timegrid/scripts/layouts/layout.js
+END
+weekly.js
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repository/!svn/ver/9624/course-picker/trunk/src/webapp/timegrid/scripts/layouts/weekly.js
+END
+nmonth.js
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repository/!svn/ver/9624/course-picker/trunk/src/webapp/timegrid/scripts/layouts/nmonth.js
+END
