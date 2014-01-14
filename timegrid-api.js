@@ -103,20 +103,21 @@
     /*
      *  Load SimileAjax if it's not already loaded
      */
-    if (typeof SimileAjax == "undefined") {
+    /*if (typeof SimileAjax == "undefined") {
         window.SimileAjax_onLoad = loadMe;
         
         //var url = "http://127.0.0.1:8888/ajax/api/simile-ajax-api.js?bundle=false";
-        var urls = ["http://simile-widgets.googlecode.com/svn-history/r900/timegrid/trunk/src/webapp/api/scripts/util/jquery.simile.js"];
+        var url = "http://simile-widgets.googlecode.com/svn-history/r900/timegrid/trunk/src/webapp/api/scripts/util/jquery.simile.js";
         //var url = "http://simile.mit.edu/repository/ajax/trunk/src/webapp/api/simile-ajax-api.js";
+        debugger;
         var createScriptElement = function() {
-            for (url in urls) {
-                var script = document.createElement("script");
-                script.type = "text/javascript";
-                script.language = "JavaScript";
-                script.src = url;
-                document.getElementsByTagName("head")[0].appendChild(script);
-            }
+            console.log("hiiiii" + url);
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.language = "JavaScript";
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+            console.log(url);
         }
         if (document.body == null) {
             try {
@@ -129,5 +130,5 @@
         }
     } else {
         loadMe();
-    }
+    }*/
 })();
