@@ -103,21 +103,20 @@
     /*
      *  Load SimileAjax if it's not already loaded
      */
-    /*if (typeof SimileAjax == "undefined") {
+    if (typeof SimileAjax == "undefined") {
         window.SimileAjax_onLoad = loadMe;
         
         //var url = "http://127.0.0.1:8888/ajax/api/simile-ajax-api.js?bundle=false";
-        var url = "http://simile-widgets.googlecode.com/svn-history/r900/timegrid/trunk/src/webapp/api/scripts/util/jquery.simile.js";
+        var urls = ["http://static.simile.mit.edu/ajax/api-2.0/simile-ajax-api.js", "http://simile-widgets.googlecode.com/svn-history/r900/timegrid/trunk/src/webapp/api/scripts/util/jquery.simile.js"];
         //var url = "http://simile.mit.edu/repository/ajax/trunk/src/webapp/api/simile-ajax-api.js";
-        debugger;
         var createScriptElement = function() {
-            console.log("hiiiii" + url);
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.language = "JavaScript";
-            script.src = url;
-            document.getElementsByTagName("head")[0].appendChild(script);
-            console.log(url);
+            for (url in urls) {
+                var script = document.createElement("script");
+                script.type = "text/javascript";
+                script.language = "JavaScript";
+                script.src = urls[url];
+                document.getElementsByTagName("head")[0].appendChild(script);
+            }
         }
         if (document.body == null) {
             try {
@@ -130,5 +129,5 @@
         }
     } else {
         loadMe();
-    }*/
+    }
 })();
