@@ -107,7 +107,7 @@
         window.SimileAjax_onLoad = loadMe;
         
         //var url = "http://127.0.0.1:8888/ajax/api/simile-ajax-api.js?bundle=false";
-        var urls = ["http://static.simile.mit.edu/ajax/api-2.0/simile-ajax-api.js", "http://simile-widgets.googlecode.com/svn-history/r900/timegrid/trunk/src/webapp/api/scripts/util/jquery.simile.js"];
+        var urls = ["http://simile-widgets.googlecode.com/svn-history/r900/timegrid/trunk/src/webapp/api/scripts/util/jquery.simile.js"];
         //var url = "http://simile.mit.edu/repository/ajax/trunk/src/webapp/api/simile-ajax-api.js";
         var createScriptElement = function() {
             for (url in urls) {
