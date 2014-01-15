@@ -5,7 +5,6 @@
  *****************************************************************************/
 
 (function() {
-    var loadMe = function() {
         if (typeof window.Timegrid != "undefined") {
             return;
         }
@@ -62,28 +61,28 @@
             locales.push(locale);
         }
         
-        var url = SimileAjax.findScript(document, "timegrid-api.js");
+        var url = $.findScript(document, "timegrid-api.js");
         if (url == null) {
             Timegrid.error = new Error("Failed to derive URL prefix for Simile Timegrid API code files");
             return;
         }
         Timegrid.urlPrefix = url.substr(0, url.indexOf("timegrid-api.js"));
         var paramTypes = { bundle: Boolean, autoCreate: Boolean };
-        SimileAjax.parseURLParameters(url, Timegrid.params, paramTypes);
+        $.parseURLParameters(url, Timegrid.params, paramTypes);
         
         /*
          *  Core scripts and styles
          */
         if (Timegrid.params.bundle) {
-            SimileAjax.includeJavascriptFiles(document, Timegrid.urlPrefix, [ 
+            $.includeJavascriptFiles(document, Timegrid.urlPrefix, [ 
                 "scripts/util/jquery.dimensions.js", 
                 "scripts/util/jquery.simile.js", 
                 "timegrid-bundle.js"
             ]);
-            SimileAjax.includeCssFiles(document, Timegrid.urlPrefix, [ "timegrid-bundle.css" ]);
+            $.includeCssFiles(document, Timegrid.urlPrefix, [ "timegrid-bundle.css" ]);
         } else {
-            SimileAjax.includeJavascriptFiles(document, Timegrid.urlPrefix + "scripts/", javascriptFiles);
-            SimileAjax.includeCssFiles(document, Timegrid.urlPrefix + "styles/", cssFiles);
+            $.includeJavascriptFiles(document, Timegrid.urlPrefix + "scripts/", javascriptFiles);
+            $.includeCssFiles(document, Timegrid.urlPrefix + "styles/", cssFiles);
         }
         
         /*
@@ -93,17 +92,16 @@
         for (var i = 0; i < locales.length; i++) {
             localeFiles.push(locales[i] + "/locale.js");
         };
-        SimileAjax.includeJavascriptFiles(document, Timegrid.urlPrefix + "locales/", localeFiles);
+        $.includeJavascriptFiles(document, Timegrid.urlPrefix + "locales/", localeFiles);
         if (Timegrid.params.autoCreate) { 
-            SimileAjax.includeJavascriptFile(document, Timegrid.urlPrefix + "scripts/create.js");
+            $.includeJavascriptFile(document, Timegrid.urlPrefix + "scripts/create.js");
         }
         Timegrid.loaded = true;
-    };
     
     /*
      *  Load SimileAjax if it's not already loaded
      */
-    if (typeof SimileAjax == "undefined") {
+    /*if (typeof SimileAjax == "undefined") {
         window.SimileAjax_onLoad = loadMe;
         
         //var url = "http://127.0.0.1:8888/ajax/api/simile-ajax-api.js?bundle=false";
@@ -129,5 +127,5 @@
         }
     } else {
         loadMe();
-    }
+    }*/
 })();
