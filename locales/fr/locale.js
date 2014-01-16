@@ -19,12 +19,12 @@
 
     var urlPrefix = Timegrid.urlPrefix + "locales/fr/";
     if (Timegrid.bundle) {
-        SimileAjax.includeJavascriptFiles(document, urlPrefix, [ "timegrid-fr-bundle.js" ]);
+        $.includeJavascriptFiles(document, urlPrefix, [ "timegrid-fr-bundle.js" ]);
         if (cssFiles.length > 0) {
-            SimileAjax.includeCssFiles(document, urlPrefix, [ "timegrid-fr-bundle.css" ]);
+            $.includeCssFiles(document, urlPrefix, [ "timegrid-fr-bundle.css" ]);
         }
     } else {
-        SimileAjax.includeJavascriptFiles(document, urlPrefix + "scripts/", javascriptFiles);
-        SimileAjax.includeCssFiles(document, urlPrefix + "styles/", cssFiles);
+        $.includeJavascriptFiles(document, urlPrefix + "scripts/", javascriptFiles);
+        $.includeCssFiles(document, urlPrefix + "styles/", cssFiles);
     }
 })();

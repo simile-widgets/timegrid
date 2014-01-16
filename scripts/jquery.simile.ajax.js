@@ -138,5 +138,221 @@ jQuery.extend({
         $.each(filenames, function (index, value) {
             $.includeCssFile(doc, urlPrefix + value);
         });
+    },
+    
+    debugLog:   function(msg, silent) {
+        var f;
+        if ("console" in window && "log" in window.console) { // FireBug installed
+            f = function(msg2) {
+                console.log(msg2);
+            }
+        } else {
+            f = function(msg2) {
+                if (!silent) {
+                    alert(msg2);
+                }
+            }
+        }
+        f(msg);
+    },
+    
+    createMessageBubble:    function(doc, urlPrefix) {
+        var an = navigator.appName.toLowerCase();
+        var containerDiv = doc.createElement("div");
+        var pngIsTranslucent = (an.indexOf("microsoft") == -1) || ($.getBrowserMajorVersion() > 6);
+        if (pngIsTranslucent) {
+            var topDiv = doc.createElement("div");
+            topDiv.style.height = "33px";
+            topDiv.style.background = "url(" + urlPrefix + "images/message-top-left.png) top left no-repeat";
+            topDiv.style.paddingLeft = "44px";
+            containerDiv.appendChild(topDiv);
+            
+            var topRightDiv = doc.createElement("div");
+            topRightDiv.style.height = "33px";
+            topRightDiv.style.background = "url(" + urlPrefix + "images/message-top-right.png) top right no-repeat";
+            topDiv.appendChild(topRightDiv);
+            
+            var middleDiv = doc.createElement("div");
+            middleDiv.style.background = "url(" + urlPrefix + "images/message-left.png) top left repeat-y";
+            middleDiv.style.paddingLeft = "44px";
+            containerDiv.appendChild(middleDiv);
+            
+            var middleRightDiv = doc.createElement("div");
+            middleRightDiv.style.background = "url(" + urlPrefix + "images/message-right.png) top right repeat-y";
+            middleRightDiv.style.paddingRight = "44px";
+            middleDiv.appendChild(middleRightDiv);
+            
+            var contentDiv = doc.createElement("div");
+            middleRightDiv.appendChild(contentDiv);
+            
+            var bottomDiv = doc.createElement("div");
+            bottomDiv.style.height = "55px";
+            bottomDiv.style.background = "url(" + urlPrefix + "images/message-bottom-left.png) bottom left no-repeat";
+            bottomDiv.style.paddingLeft = "44px";
+            containerDiv.appendChild(bottomDiv);
+            
+            var bottomRightDiv = doc.createElement("div");
+            bottomRightDiv.style.height = "55px";
+            bottomRightDiv.style.background = "url(" + urlPrefix + "images/message-bottom-right.png) bottom right no-repeat";
+            bottomDiv.appendChild(bottomRightDiv);
+        } else {
+            containerDiv.style.border = "2px solid #7777AA";
+            containerDiv.style.padding = "20px";
+            containerDiv.style.background = "white";
+            $.setOpacity(containerDiv, 90);
+            
+            var contentDiv = doc.createElement("div");
+            containerDiv.appendChild(contentDiv);
+        }
+        
+        return {
+            containerDiv:   containerDiv,
+            contentDiv:     contentDiv
+        };
+    },
+    
+    setOpacity:     function(elmt, opacity) {
+        var an = navigator.appName.toLowerCase();
+    
+        if (an.indexOf("microsoft") == -1) {
+            elmt.style.filter = "progid:DXImageTransform.Microsoft.Alpha(Style=0,Opacity=" + opacity + ")";
+        } else {
+            var o = (opacity / 100).toString();
+            elmt.style.opacity = o;
+            elmt.style.MozOpacity = o;
+        }
+    },
+    
+    getBrowserMajorVersion:     function() {
+        var ua = navigator.userAgent.toLowerCase();
+        
+        var isIE = (an.indexOf("microsoft") != -1);
+        var isNetscape = (an.indexOf("netscape") != -1);
+        var isMozilla = (ua.indexOf("mozilla") != -1);
+        var isFirefox = (ua.indexOf("firefox") != -1);
+        var isOpera = (an.indexOf("opera") != -1);
+        var isSafari = (an.indexOf("safari") != -1);
+        
+        var browserMajorVersion;
+        var parseVersionString = function(s) {
+            var a = s.split(".");
+            browserMajorVersion = parseInt(a[0]);
+        };
+        
+        if (isMozilla) {
+            var offset = ua.indexOf("mozilla/");
+            if (offset >= 0) {
+                parseVersionString(ua.substring(offset + 8, indexOf(ua, " ", offset)));
+            }
+        }
+        if (isIE) {
+            var offset = ua.indexOf("msie ");
+            if (offset >= 0) {
+                parseVersionString(ua.substring(offset + 5, indexOf(ua, ";", offset)));
+            }
+        }
+        if (isNetscape) {
+            var offset = ua.indexOf("rv:");
+            if (offset >= 0) {
+                parseVersionString(ua.substring(offset + 3, indexOf(ua, ")", offset)));
+            }
+        }
+        if (isFirefox) {
+            var offset = ua.indexOf("firefox/");
+            if (offset >= 0) {
+                parseVersionString(ua.substring(offset + 8, indexOf(ua, " ", offset)));
+            }
+        }
+        return browserMajorVersion;
+    },
+    
+    getXmlHttp:     function(url, fError, fDone) {
+        var xmlhttp = $.createXmlHttpRequest();
+    
+        xmlhttp.open("GET", url, true);
+        xmlhttp.onreadystatechange = function() {
+            $.onReadyStateChange(xmlhttp, fError, fDone);
+        };
+        xmlhttp.send(null);
+    },
+    
+        /**
+     *  Creates an XMLHttpRequest object. On the first run, this
+     *  function creates a platform-specific function for
+     *  instantiating an XMLHttpRequest object and then replaces
+     *  itself with that function.
+     */
+    createXmlHttpRequest:   function() {
+        var isIE = (an.indexOf("microsoft") != -1);
+        if (isIE) {
+            var programIDs = [
+            "Msxml2.XMLHTTP",
+            "Microsoft.XMLHTTP",
+            "Msxml2.XMLHTTP.4.0"
+            ];
+            for (var i = 0; i < programIDs.length; i++) {
+                try {
+                    var programID = programIDs[i];
+                    var f = function() {
+                        return new ActiveXObject(programID);
+                    };
+                    var o = f();
+                    
+                    // We are replacing the SimileAjax._createXmlHttpRequest
+                    // function with this inner function as we've
+                    // found out that it works. This is so that we
+                    // don't have to do all the testing over again
+                    // on subsequent calls.
+                    return f;
+                    
+                    return o;
+                } catch (e) {
+                    // silent
+                }
+            }
+            // fall through to try new XMLHttpRequest();
+        }
+    
+        try {
+            var f = function() {
+                return new XMLHttpRequest();
+            };
+            var o = f();
+            
+            return o;
+        } catch (e) {
+            throw new Error("Failed to create an XMLHttpRequest object");
+        }
+    },
+    
+    onReadyStateChange:     function(xmlhttp, fError, fDone) {
+        switch (xmlhttp.readyState) {
+        // 1: Request not yet made
+        // 2: Contact established with server but nothing downloaded yet
+        // 3: Called multiple while downloading in progress
+        
+        // Download complete
+        case 4:
+            try {
+                if (xmlhttp.status == 0     // file:// urls, works on Firefox
+                 || xmlhttp.status == 200   // http:// urls
+                ) {
+                    if (fDone) {
+                        fDone(xmlhttp);
+                    }
+                } else {
+                    if (fError) {
+                        fError(
+                            xmlhttp.statusText,
+                            xmlhttp.status,
+                            xmlhttp
+                        );
+                    }
+                }
+            } catch (e) {
+                SimileAjax.Debug.exception("XmlHttp: Error handling onReadyStateChange", e);
+            }
+            break;
+        }
     }
 });
