@@ -9,7 +9,7 @@ Timegrid.abstract = function(name) {
     };
 };
 
-SimileAjax.DateTime.Interval = function(ms) {
+/*SimileAjax.DateTime.Interval = function(ms) {
     // Conversion factors as varants to eliminate all the multiplication
     var SECONDS_CF     = 1000;
     var MINUTES_CF     = 60000;          
@@ -44,4 +44,4 @@ SimileAjax.DateTime.Interval = function(ms) {
 
 SimileAjax.DateTime.Interval.prototype.toString = function() {
     return this.milliseconds.toString();
-};
+};*/
