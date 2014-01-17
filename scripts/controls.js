@@ -65,12 +65,20 @@ Timegrid.Controls.TabSet.prototype.render = function(container) {
         return function() { self.switchTo(title); }; 
     };
     for (var lTitle in this._layoutMap) {
-        var tab = $('<div><a href="javascript:void">' + lTitle + '</a></div>')
-                    .height(this._layoutMap[lTitle].tabHeight + "px")
-                    .click(makeCallback(lTitle))
-                    .addClass('timegrid-tab').addClass('timegrid-rounded');
-        tabDiv.prepend(tab);
-        this._tabs[lTitle] = tab;
+        $newLink = $("<a />", {
+            href : "javascript:void",
+            text : lTitle
+        });
+
+        $tab = $('<div></div>', { height : this._layoutMap[lTitle].tabHeight + "px"})
+        .addClass("timegrid-tab")
+        .addClass('timegrid-rounded')
+        .append($newLink);
+        
+        $tab.click(makeCallback(lTitle));
+        
+        tabDiv.prepend($tab);
+        this._tabs[lTitle] = $tab;
     }
     if (!$.browser.msie) { $('.timegrid-tab').corner("30px top"); }
 };

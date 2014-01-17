@@ -158,7 +158,7 @@ Timegrid._Impl.prototype._construct = function() {
     }
     $(container).addClass('timegrid-default');
 
-    var message = $.createMessageBubble(doc, "timegrid");
+    var message = $.createMessageBubble(doc, Timegrid.urlPrefix);
     message.containerDiv.className = "timegrid-message-container";
     container.appendChild(message.containerDiv);
 
@@ -168,7 +168,6 @@ Timegrid._Impl.prototype._construct = function() {
 
     this.showLoadingMessage = function() { $(message.containerDiv).show(); };
     this.hideLoadingMessage = function() { $(message.containerDiv).hide(); };
-
     this._panel.render(container);
     this.rendering = false;
 };
