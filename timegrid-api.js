@@ -50,7 +50,7 @@
         ];
         
         var locales = [ "en", "fr" ];
-        
+
         var defaultClientLocales = ("language" in navigator ? navigator.language : navigator.browserLanguage).split(";");
         for (var l = 0; l < defaultClientLocales.length; l++) {
             var locale = defaultClientLocales[l];
@@ -93,7 +93,7 @@
             localeFiles.push(locales[i] + "/locale.js");
         };
         $.includeJavascriptFiles(document, Timegrid.urlPrefix + "locales/", localeFiles);
-        if (Timegrid.params.autoCreate) { 
+        if (Timegrid.params.autoCreate) {
             $.includeJavascriptFile(document, Timegrid.urlPrefix + "scripts/create.js");
         }
         Timegrid.loaded = true;
