@@ -154,7 +154,6 @@ Timegrid.Controls.Iterator.prototype.render = function(container) {
     $nextLink.click(makeNextCallback(this._layout));
     this._div.append($prevLink);
     this._div.append($nextLink);
-    $s = $('<span></span>', { text: this._layout.getCurrent() } );
     this._div.append('<span></span>', { text: this._layout.getCurrent() } );
     return this._div;
 };
