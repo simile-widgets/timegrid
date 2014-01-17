@@ -28,7 +28,7 @@ Timegrid.NDayLayout = function(eventSource, params) {
     this.xMapper = function(obj) { 
         var time = self.timezoneMapper(obj.time);
         var start = self.timezoneMapper(self.startTime);
-        var ivl = new SimileAjax.DateTime.Interval(time - start); 
+        var ivl = $.dateTimeInterval(time - start);
         return ivl.days; 
     };
     this.yMapper = function(obj) { 
