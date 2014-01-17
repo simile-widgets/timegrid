@@ -20,7 +20,6 @@ Timegrid.Grid = function(objs, xSize, ySize, xMapper, yMapper) {
 
     this.addAll(objs);
 };
-
 $.inherit(Timegrid.Grid, Timegrid.ListenerAware);
 
 Timegrid.Grid.prototype.add = function(obj) {
