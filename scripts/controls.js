@@ -141,16 +141,20 @@ Timegrid.Controls.Iterator.prototype.render = function(container) {
             self.render();
         };
     };
-    var prevLink = $('<img alt="Previous" src="' + Timegrid.urlPrefix + '/images/go-previous.png"></img>')
-                   .wrap('<a href="javascript:void"></a>').parent()
-                   .addClass('timegrid-iterator-prev')
-                   .click(makePrevCallback(this._layout));
-    var nextLink = $('<img alt="Next" src="' + Timegrid.urlPrefix + '/images/go-next.png"></img>')
-                   .wrap('<a href="javascript:void"></a>').parent()
+    $imageURL = Timegrid.urlPrefix + "/images/go-previous.png";
+    $prevLink = $('<a></a>', {href: "javascript:void"})
+                   .append('<img></img>', {alt: "Previous", src: $imageURL})
+                   .parent()
+                   .addClass('timegrid-iterator-prev');
+    $imageURL = Timegrid.urlPrefix + "/images/go-next.png";
+    $nextLink = $('<a></a>', {href: "javascript:void"})
+                   .append('<img></img>', {alt: "Next", scr: $imageURL})
+                   .parent()
                    .addClass('timegrid-iterator-next')
-                   .click(makeNextCallback(this._layout));
-    this._div.append(prevLink);
-    this._div.append(nextLink);
-    this._div.append('<span>' + this._layout.getCurrent() + '</span>');
+    $nextLink.click(makeNextCallback(this._layout));
+    this._div.append($prevLink);
+    this._div.append($nextLink);
+    $s = $('<span></span>', { text: this._layout.getCurrent() } );
+    this._div.append('<span></span>', { text: this._layout.getCurrent() } );
     return this._div;
 };
