@@ -141,19 +141,17 @@ Timegrid.Controls.Iterator.prototype.render = function(container) {
             self.render();
         };
     };
-    $imageURL = Timegrid.urlPrefix + "/images/go-previous.png";
+    $imageURL = Timegrid.urlPrefix + "images/go-previous.png";
     $prevLink = $('<a></a>', {href: "javascript:void"})
-                   .append('<img></img>', {alt: "Previous", src: $imageURL})
-                   .parent()
-                   .addClass('timegrid-iterator-prev');
-    $imageURL = Timegrid.urlPrefix + "/images/go-next.png";
+                   .addClass('timegrid-iterator-prev')
+                   .append($('<img />', {alt: "Previous", src: $imageURL}));
+    $imageURL = Timegrid.urlPrefix + "images/go-next.png";
     $nextLink = $('<a></a>', {href: "javascript:void"})
-                   .append('<img></img>', {alt: "Next", scr: $imageURL})
-                   .parent()
                    .addClass('timegrid-iterator-next')
+                   .append($('<img />', {alt: "Next", src: $imageURL}));
     $nextLink.click(makeNextCallback(this._layout));
     this._div.append($prevLink);
     this._div.append($nextLink);
-    this._div.append('<span></span>', { text: this._layout.getCurrent() } );
+    this._div.append($('<span></span>', { text: this._layout.getCurrent() }));
     return this._div;
 };

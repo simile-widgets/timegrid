@@ -26,7 +26,7 @@ jQuery.extend({
     /**
      * Recursively deep-copies the given object.
      */
-    clone: function(obj, deep) {
+    deepClone: function(obj, deep) {
         if (deep == null) { deep = true; }
         var objectClone = new obj.constructor();
         for (var property in obj) {
