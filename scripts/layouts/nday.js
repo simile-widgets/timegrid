@@ -28,7 +28,7 @@ Timegrid.NDayLayout = function(eventSource, params) {
     this.xMapper = function(obj) { 
         var time = self.timezoneMapper(obj.time);
         var start = self.timezoneMapper(self.startTime);
-        var ivl = $.dateTimeInterval(time - start);
+        var ivl = Timegrid.Interval(time - start);
         return ivl.days; 
     };
     this.yMapper = function(obj) { 

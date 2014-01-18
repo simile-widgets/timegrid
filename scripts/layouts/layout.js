@@ -41,7 +41,7 @@ Timegrid.LayoutFactory.registerLayout = function(name, constructor) {
 Timegrid.LayoutFactory.createLayout = function(name, eventSource, params) {
     var constructor = Timegrid.LayoutFactory._constructors[name];
     if (typeof constructor == 'function') {
-        layout = new constructor(eventSource, $.clone(params));
+        layout = new constructor(eventSource, $.deepClone(params));
         return layout;
     } else {
         throw "No such layout!";   
