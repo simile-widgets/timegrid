@@ -222,9 +222,14 @@ jQuery.extend({
             elmt.style.MozOpacity = o;
         }
     },
+
+    getIsIE:    function() {
+        var an = navigator.userAgent.toLowerCase();
+        return (an.indexOf("microsoft") != -1);
+    },
     
     getBrowserMajorVersion:     function() {
-        var ua = navigator.userAgent.toLowerCase();
+        var an = navigator.userAgent.toLowerCase();
         
         var isIE = (an.indexOf("microsoft") != -1);
         var isNetscape = (an.indexOf("netscape") != -1);
@@ -323,6 +328,10 @@ jQuery.extend({
         } catch (e) {
             throw new Error("Failed to create an XMLHttpRequest object");
         }
+    },
+
+    debugException:     function(e, msg) {
+        console.error(msg + " %o", e);
     },
     
     onReadyStateChange:     function(xmlhttp, fError, fDone) {
