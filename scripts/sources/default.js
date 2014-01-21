@@ -267,8 +267,8 @@ Timegrid.DefaultEventSource.Event = function(
     this._latestStart = (latestStart != null) ? latestStart : (instant ? this._end : this._start);
     this._earliestEnd = (earliestEnd != null) ? earliestEnd : (instant ? this._start : this._end);
     
-    this._text = SimileAjax.HTML.deEntify(text);
-    this._description = SimileAjax.HTML.deEntify(description);
+    this._text = $('<div />').html(text).text();
+    this._description = $('<div />').html(text).text();
     this._image = (image != null && image != "") ? image : null;
     this._link = (link != null && link != "") ? link : null;
     
@@ -301,7 +301,7 @@ Timegrid.DefaultEventSource.Event.prototype = {
     getTextColor:   function() { return this._textColor; },
 
     getInterval: function() {
-        return new SimileAjax.DateTime.Interval(this.getEnd() - 
+        return new Timegrid.Interval(this.getEnd() - 
                 this.getStart());
     },
     
