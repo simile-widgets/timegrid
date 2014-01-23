@@ -269,22 +269,20 @@ Timegrid.Layout.prototype.renderEvents = Timegrid.abstract("renderEvents");
  * @return {Element} a DOM element containing this layout's gridlines
  */
 Timegrid.Layout.prototype.renderGridlines = function() {
-    var gridlineContainer = document.createElement("div");
-    gridlineContainer.className = 'timegrid-gridlines';
+    var gridlineContainer = $("<table></table>", {class: 'timegrid-gridlines'});
     
-    for (var x = 0; x < this.xSize; x++) { // Vertical lines
-        var vlineDiv = document.createElement('div');
-        vlineDiv.className = 'timegrid-vline';
-        vlineDiv.style.height = this.gridheight + "px";
-        vlineDiv.style.left = x * this.xCell + "px";
-        gridlineContainer.appendChild(vlineDiv);
-    }
-    for (var y = 0; y <= this.ySize; y++) { // Horizontal lines
-        var hlineDiv = document.createElement('div');
-        hlineDiv.className = 'timegrid-hline';
-        hlineDiv.style.width = "100%";
-        hlineDiv.style.top = y * this.yCell + "px";
-        gridlineContainer.appendChild(hlineDiv);
+    for (var y = 0; y <= this.ySize - 1; y++) { // Horizontal lines
+        var hlineDiv = $('<tr></tr>', { id: '' + y,
+                                        class:'timegrid-hline', 
+                                        height: this.yCell + "px"});
+        gridlineContainer.append(hlineDiv);
+                
+        for (var x = 0; x < this.xSize; x++) { // Vertical lines
+            var vlineDiv = $('<th></th>', { id: '' + x,
+                                            class: 'timegrid-vline',
+                                            width: this.xCell + "px" });
+            hlineDiv.append(vlineDiv);
+        }
     }
     return gridlineContainer;
 };
