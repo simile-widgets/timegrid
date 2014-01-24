@@ -1,6 +1,7 @@
 /******************************************************************************
  * Timegrid
  *****************************************************************************/
+Timegrid.listener = null;
 
 Timegrid.create = function(node, eventSource, layoutName, layoutParams) {
     return new Timegrid._Impl(node, eventSource, layoutName, layoutParams);
@@ -15,6 +16,8 @@ Timegrid.resize = function() {
 
 Timegrid.createFromDOM = function(elmt) {
     var config = Timegrid.getConfigFromDOM(elmt);
+    Timegrid.listener = window[config.listener];
+
     var layoutNames = config.views.split(",");
     var getExtension = function(s) {
         return s.split('.').pop().toLowerCase();
@@ -145,6 +148,7 @@ Timegrid._Impl.prototype._construct = function() {
         return Timegrid.LayoutFactory.createLayout(s, self._eventSource,
                                                       self._layoutParams);
     });
+
     if (this._panel) {
         this._panel.setLayouts(this._layouts);
     } else {
