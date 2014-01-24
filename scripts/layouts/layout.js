@@ -269,16 +269,42 @@ Timegrid.Layout.prototype.renderEvents = Timegrid.abstract("renderEvents");
  * @return {Element} a DOM element containing this layout's gridlines
  */
 Timegrid.Layout.prototype.renderGridlines = function() {
+    var numToDay = {
+        0:  "S",
+        1:  "M",
+        2:  "T",
+        3:  "W",
+        4:  "R",
+        5:  "F",
+        6:  "S" 
+    };
+
+    var numToHour = {
+        0:  "8",
+        1:  "9",
+        2:  "10",
+        3:  "11",
+        4:  "12",
+        5:  "13",
+        6:  "14",
+        7:  "15",
+        8:  "16",
+        9:  "17",
+        10: "18",
+        11: "19",
+        12: "20",
+        13: "21"
+    };
+    
     var gridlineContainer = $("<table></table>", {class: 'timegrid-gridlines'});
     
     for (var y = 0; y <= this.ySize - 1; y++) { // Horizontal lines
-        var hlineDiv = $('<tr></tr>', { id: '' + y,
-                                        class:'timegrid-hline', 
+        var hlineDiv = $('<tr></tr>', { class:'timegrid-hline', 
                                         height: this.yCell + "px"});
         gridlineContainer.append(hlineDiv);
                 
         for (var x = 0; x < this.xSize; x++) { // Vertical lines
-            var vlineDiv = $('<th></th>', { id: '' + x,
+            var vlineDiv = $('<th></th>', { id: numToDay[x] + numToHour[y],
                                             class: 'timegrid-vline',
                                             width: this.xCell + "px" });
             hlineDiv.append(vlineDiv);
