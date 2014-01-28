@@ -114,12 +114,7 @@ Timegrid.NDayLayout.prototype.renderEvents = function(doc) {
             currentCount--;
         }
     }
-    var nowDiv = this.renderNow();
-    if (nowDiv) { 
-        return $([eventContainer, nowDiv]); 
-    } else {
-        return eventContainer;
-    }
+    return eventContainer;
 };
 
 Timegrid.NDayLayout.prototype.renderEvent = function(evt, x, y) {
