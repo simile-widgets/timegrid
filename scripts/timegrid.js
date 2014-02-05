@@ -2,6 +2,8 @@
  * Timegrid
  *****************************************************************************/
 Timegrid.listener = null;
+Timegrid.eventGridClickListener = null;
+Timegrid.eventGridInput = null;
 
 Timegrid.create = function(node, eventSource, layoutName, layoutParams) {
     return new Timegrid._Impl(node, eventSource, layoutName, layoutParams);
@@ -16,7 +18,11 @@ Timegrid.resize = function() {
 
 Timegrid.createFromDOM = function(elmt) {
     var config = Timegrid.getConfigFromDOM(elmt);
+    console.log(config);
     Timegrid.listener = window[config.listener];
+    console.log("supposed listener " + window[config.gridlistener]);
+    Timegrid.eventGridClickListener = window[config.gridlistener];
+    Timegrid.eventGridInput = window[config.gridlistenerinput];
 
     var layoutNames = config.views.split(",");
     var getExtension = function(s) {
