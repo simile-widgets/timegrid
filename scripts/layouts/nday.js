@@ -131,6 +131,7 @@ Timegrid.NDayLayout.prototype.renderEvent = function(evt, x, y) {
     ediv.style.height = this.yCell * length + "px";
     ediv.style.top = this.yCell * y + "px";
     ediv.style.left = this.xCell * x + 'px';
+    ediv.title = evt.getText();
     if (evt.getColor()) { ediv.style.backgroundColor = evt.getColor(); }
     if (evt.getTextColor()) { ediv.style.color = evt.getTextColor(); }
 
