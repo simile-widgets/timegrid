@@ -304,7 +304,7 @@ Timegrid.Layout.prototype.renderGridlines = function() {
         gridlineContainer.append(hlineDiv);
                 
         for (var x = 0; x < this.xSize; x++) { // Vertical lines
-            var vlineDiv = $('<th></th>', { id: numToDay[x] + numToHour[y],
+            var vlineDiv = $('<th></th>', { classid: numToDay[x] + numToHour[y],
                                             class: 'timegrid-vline',
                                             width: this.xCell + "px" });
             hlineDiv.append(vlineDiv);
