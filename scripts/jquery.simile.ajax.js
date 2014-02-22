@@ -233,8 +233,8 @@ jQuery.extend({
         
         var isIE = (an.indexOf("microsoft") != -1);
         var isNetscape = (an.indexOf("netscape") != -1);
-        var isMozilla = (ua.indexOf("mozilla") != -1);
-        var isFirefox = (ua.indexOf("firefox") != -1);
+        var isMozilla = (an.indexOf("mozilla") != -1);
+        var isFirefox = (an.indexOf("firefox") != -1);
         var isOpera = (an.indexOf("opera") != -1);
         var isSafari = (an.indexOf("safari") != -1);
         
@@ -244,28 +244,33 @@ jQuery.extend({
             browserMajorVersion = parseInt(a[0]);
         };
         
+        var indexOf = function(s, sub, start) {
+            var i = s.indexOf(sub, start);
+            return i >= 0 ? i : s.length;
+        };
+        
         if (isMozilla) {
-            var offset = ua.indexOf("mozilla/");
+            var offset = an.indexOf("mozilla/");
             if (offset >= 0) {
-                parseVersionString(ua.substring(offset + 8, indexOf(ua, " ", offset)));
+                parseVersionString(an.substring(offset + 8, indexOf(an, " ", offset)));
             }
         }
         if (isIE) {
-            var offset = ua.indexOf("msie ");
+            var offset = an.indexOf("msie ");
             if (offset >= 0) {
-                parseVersionString(ua.substring(offset + 5, indexOf(ua, ";", offset)));
+                parseVersionString(an.substring(offset + 5, indexOf(an, ";", offset)));
             }
         }
         if (isNetscape) {
-            var offset = ua.indexOf("rv:");
+            var offset = an.indexOf("rv:");
             if (offset >= 0) {
-                parseVersionString(ua.substring(offset + 3, indexOf(ua, ")", offset)));
+                parseVersionString(an.substring(offset + 3, indexOf(an, ")", offset)));
             }
         }
         if (isFirefox) {
-            var offset = ua.indexOf("firefox/");
+            var offset = an.indexOf("firefox/");
             if (offset >= 0) {
-                parseVersionString(ua.substring(offset + 8, indexOf(ua, " ", offset)));
+                parseVersionString(an.substring(offset + 8, indexOf(an, " ", offset)));
             }
         }
         return browserMajorVersion;
