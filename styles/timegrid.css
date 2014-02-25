@@ -181,3 +181,12 @@ span.timegrid-month-date-label {
     font-weight:    bold;
     text-align:     center;
 }
+
+@media print {
+
+    .print {
+        display: block;
+        overflow: auto;
+    }
+    
+}

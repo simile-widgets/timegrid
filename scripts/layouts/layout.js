@@ -162,7 +162,7 @@ Timegrid.Layout.prototype.render = function(container) {
     }
     if (container) {
         this._container = container;
-        this._viewDiv = $("<div></div>").addClass('timegrid-view')
+        this._viewDiv = $("<div media='print'></div>").addClass('timegrid-view print')
                                         .css('top', this.tabHeight + "px");
         $(this._container).append(this._viewDiv);
     } else { 
