@@ -28,7 +28,7 @@ Timegrid.NDayLayout = function(eventSource, params) {
     this.xMapper = function(obj) { 
         var time = self.timezoneMapper(obj.time);
         var start = self.timezoneMapper(self.startTime);
-        var ivl = new SimileAjax.DateTime.Interval(time - start); 
+        var ivl = Timegrid.Interval(time - start);
         return ivl.days; 
     };
     this.yMapper = function(obj) { 
@@ -114,12 +114,7 @@ Timegrid.NDayLayout.prototype.renderEvents = function(doc) {
             currentCount--;
         }
     }
-    var nowDiv = this.renderNow();
-    if (nowDiv) { 
-        return $([eventContainer, nowDiv]); 
-    } else {
-        return eventContainer;
-    }
+    return eventContainer;
 };
 
 Timegrid.NDayLayout.prototype.renderEvent = function(evt, x, y) {
@@ -136,8 +131,14 @@ Timegrid.NDayLayout.prototype.renderEvent = function(evt, x, y) {
     ediv.style.height = this.yCell * length + "px";
     ediv.style.top = this.yCell * y + "px";
     ediv.style.left = this.xCell * x + 'px';
+    ediv.title = evt.getText();
     if (evt.getColor()) { ediv.style.backgroundColor = evt.getColor(); }
     if (evt.getTextColor()) { ediv.style.color = evt.getTextColor(); }
+
+    if (Timegrid.eventGridClickListener && Timegrid.eventGridInput) {
+        var inp = Timegrid.eventGridInput(evt.getText());
+        ediv.onclick = function() { Timegrid.eventGridClickListener(inp); };
+    }
     return ediv; // Return the actual DOM element
 };
 

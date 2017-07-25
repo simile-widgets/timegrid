@@ -9,6 +9,8 @@ Timegrid.Debug.log = function(msg) {
 };
 
 Timegrid.Debug.exception = function(e) {
-    alert("Caught exception: " + (SimileAjax.Platform.isIE ? e.message : e));
+    e = $.getIsIE() ? e.message : e;
+    $.debugException(e, "Caught exception");
+    //alert("Caught exception: " + (SimileAjax.Platform.isIE ? e.message : e));
 };
 

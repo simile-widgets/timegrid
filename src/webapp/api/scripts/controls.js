@@ -65,12 +65,20 @@ Timegrid.Controls.TabSet.prototype.render = function(container) {
         return function() { self.switchTo(title); }; 
     };
     for (var lTitle in this._layoutMap) {
-        var tab = $('<div><a href="javascript:void">' + lTitle + '</a></div>')
-                    .height(this._layoutMap[lTitle].tabHeight + "px")
-                    .click(makeCallback(lTitle))
-                    .addClass('timegrid-tab').addClass('timegrid-rounded');
-        tabDiv.prepend(tab);
-        this._tabs[lTitle] = tab;
+        $newLink = $("<a />", {
+            href : "javascript:void",
+            text : lTitle
+        });
+
+        $tab = $('<div></div>', { height : this._layoutMap[lTitle].tabHeight + "px"})
+        .addClass("timegrid-tab")
+        .addClass('timegrid-rounded')
+        .append($newLink);
+        
+        $tab.click(makeCallback(lTitle));
+        
+        tabDiv.prepend($tab);
+        this._tabs[lTitle] = $tab;
     }
     if (!$.browser.msie) { $('.timegrid-tab').corner("30px top"); }
 };
@@ -133,16 +141,17 @@ Timegrid.Controls.Iterator.prototype.render = function(container) {
             self.render();
         };
     };
-    var prevLink = $('<img alt="Previous" src="' + Timegrid.urlPrefix + '/images/go-previous.png"></img>')
-                   .wrap('<a href="javascript:void"></a>').parent()
+    $imageURL = Timegrid.urlPrefix + "images/go-previous.png";
+    $prevLink = $('<a></a>', {href: "javascript:void"})
                    .addClass('timegrid-iterator-prev')
-                   .click(makePrevCallback(this._layout));
-    var nextLink = $('<img alt="Next" src="' + Timegrid.urlPrefix + '/images/go-next.png"></img>')
-                   .wrap('<a href="javascript:void"></a>').parent()
+                   .append($('<img />', {alt: "Previous", src: $imageURL}));
+    $imageURL = Timegrid.urlPrefix + "images/go-next.png";
+    $nextLink = $('<a></a>', {href: "javascript:void"})
                    .addClass('timegrid-iterator-next')
-                   .click(makeNextCallback(this._layout));
-    this._div.append(prevLink);
-    this._div.append(nextLink);
-    this._div.append('<span>' + this._layout.getCurrent() + '</span>');
+                   .append($('<img />', {alt: "Next", src: $imageURL}));
+    $nextLink.click(makeNextCallback(this._layout));
+    this._div.append($prevLink);
+    this._div.append($nextLink);
+    this._div.append($('<span></span>', { text: this._layout.getCurrent() }));
     return this._div;
 };

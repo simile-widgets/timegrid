@@ -54,17 +54,8 @@ div.timegrid-grid-window {
     border: 1px inset black;
 }
 
-div.timegrid-hline {
-    position: absolute;
-    height: 1px;
-    overflow: hidden;
-    background-color: #999;
-}
-
-div.timegrid-vline {
-    position: absolute;
-    width: 1px;
-    background-color: #444;
+table.timegrid-gridlines, .timegrid-hline, .timegrid-vline {
+    border: 1px solid #e6e2af;
 }
 
 div.timegrid-events {
@@ -189,4 +180,13 @@ span.timegrid-month-date-label {
     font-size:      120%;
     font-weight:    bold;
     text-align:     center;
+}
+
+@media print {
+
+    .print {
+        display: block;
+        overflow: auto;
+    }
+    
 }
