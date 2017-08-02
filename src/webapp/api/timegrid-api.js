@@ -42,7 +42,9 @@
             "layouts/nday.js",
             "layouts/weekly.js",
             "layouts/monthly.js",
-            "layouts/property.js"
+            "layouts/property.js",
+            
+            "data-structure.js"
         ];
         var cssFiles = [
             "timegrid.css",

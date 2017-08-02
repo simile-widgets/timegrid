@@ -293,6 +293,7 @@ jQuery.extend({
      *  itself with that function.
      */
     createXmlHttpRequest:   function() {
+        var an = navigator.userAgent.toLowerCase();
         var isIE = (an.indexOf("microsoft") != -1);
         if (isIE) {
             var programIDs = [
@@ -364,7 +365,7 @@ jQuery.extend({
                     }
                 }
             } catch (e) {
-                SimileAjax.Debug.exception("XmlHttp: Error handling onReadyStateChange", e);
+                Timegrid.Debug.exception("XmlHttp: Error handling onReadyStateChange", e);
             }
             break;
         }

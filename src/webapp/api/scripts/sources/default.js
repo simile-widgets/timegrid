@@ -5,7 +5,7 @@
 
 Timegrid.DefaultEventSource = function(eventIndex) {
     Timegrid.DefaultEventSource.superclass.call(this);
-    this._events = (eventIndex instanceof Object) ? eventIndex : new SimileAjax.EventIndex();
+    this._events = (eventIndex instanceof Object) ? eventIndex : new Timegrid.EventIndex();
 };
 $.inherit(Timegrid.DefaultEventSource, Timegrid.ListenerAware);
 

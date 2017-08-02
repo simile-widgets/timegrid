@@ -28,6 +28,9 @@ var layoutNames=config.views.split(",");
 var getExtension=function(s){
 return s.split('.').pop().toLowerCase();
 };
+
+
+
 if(config.eventsource){
 var eventSource=eval(config.eventsource);
 var tg=Timegrid.create(elmt,eventSource,layoutNames,config);
@@ -297,7 +300,7 @@ Timegrid.Debug.exception(e);
 
 Timegrid.DefaultEventSource=function(eventIndex){
 Timegrid.DefaultEventSource.superclass.call(this);
-this._events=(eventIndex instanceof Object)?eventIndex:new SimileAjax.EventIndex();
+this._events=(eventIndex instanceof Object)?eventIndex:new Timegrid.EventIndex();
 };
 $.inherit(Timegrid.DefaultEventSource,Timegrid.ListenerAware);
 
