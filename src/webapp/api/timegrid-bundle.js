@@ -28,9 +28,6 @@ var layoutNames=config.views.split(",");
 var getExtension=function(s){
 return s.split('.').pop().toLowerCase();
 };
-
-
-
 if(config.eventsource){
 var eventSource=eval(config.eventsource);
 var tg=Timegrid.create(elmt,eventSource,layoutNames,config);
@@ -64,11 +61,13 @@ return config;
 };
 
 Timegrid.loadXML=function(url,f){
+
 var fError=function(statusText,status,xmlhttp){
 
 $.debugLog(Timegrid.l10n.xmlErrorMessage+" "+url+"\n"+statusText,true);
 };
 var fDone=function(xmlhttp){
+
 var xml=xmlhttp.responseXML;
 if(!xml.documentElement&&xmlhttp.responseStream){
 xml.load(xmlhttp.responseStream);

@@ -44,7 +44,9 @@
             "layouts/monthly.js",
             "layouts/property.js",
             
-            "data-structure.js"
+            "data-structure.js",
+            "units.js",
+            "date-time.js"
         ];
         var cssFiles = [
             "timegrid.css",
