@@ -23,7 +23,7 @@ Timegrid.NativeDateUnit.getParser = function(format) {
                     Timegrid.DateTime.parseGregorianDateTime;
                     
     return function(d) {
-        if (typeof d != 'undefined' && typeof d.toUTCString == "function") {
+        if (d != null && typeof d != "undefined" && typeof d.toUTCString == "function") {
             return d;
         } else {
             return parser(d);
