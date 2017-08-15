@@ -66,7 +66,7 @@ Timegrid.Controls.TabSet.prototype.render = function(container) {
     };
     for (var lTitle in this._layoutMap) {
         $newLink = $("<a />", {
-            href : "javascript:void",
+            href : undefined,
             text : lTitle
         });
 
@@ -142,11 +142,11 @@ Timegrid.Controls.Iterator.prototype.render = function(container) {
         };
     };
     $imageURL = Timegrid.urlPrefix + "images/go-previous.png";
-    $prevLink = $('<a></a>', {href: "javascript:void"})
+    $prevLink = $('<a></a>', {href: undefined})
                    .addClass('timegrid-iterator-prev')
                    .append($('<img />', {alt: "Previous", src: $imageURL}));
     $imageURL = Timegrid.urlPrefix + "images/go-next.png";
-    $nextLink = $('<a></a>', {href: "javascript:void"})
+    $nextLink = $('<a></a>', {href: undefined})
                    .addClass('timegrid-iterator-next')
                    .append($('<img />', {alt: "Next", src: $imageURL}));
     $nextLink.click(makeNextCallback(this._layout));

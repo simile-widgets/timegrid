@@ -61,13 +61,11 @@ return config;
 };
 
 Timegrid.loadXML=function(url,f){
-
 var fError=function(statusText,status,xmlhttp){
 
 $.debugLog(Timegrid.l10n.xmlErrorMessage+" "+url+"\n"+statusText,true);
 };
 var fDone=function(xmlhttp){
-
 var xml=xmlhttp.responseXML;
 if(!xml.documentElement&&xmlhttp.responseStream){
 xml.load(xmlhttp.responseStream);
@@ -1888,7 +1886,7 @@ return function(){self.switchTo(title);};
 };
 for(var lTitle in this._layoutMap){
 $newLink=$("<a />",{
-href:"javascript:void",
+href:undefined,
 text:lTitle
 });
 
@@ -1960,11 +1958,11 @@ self.render();
 };
 };
 $imageURL=Timegrid.urlPrefix+"images/go-previous.png";
-$prevLink=$('<a></a>',{href:"javascript:void"})
+$prevLink=$('<a></a>',{href:undefined})
 .addClass('timegrid-iterator-prev')
 .append($('<img />',{alt:"Previous",src:$imageURL}));
 $imageURL=Timegrid.urlPrefix+"images/go-next.png";
-$nextLink=$('<a></a>',{href:"javascript:void"})
+$nextLink=$('<a></a>',{href:undefined})
 .addClass('timegrid-iterator-next')
 .append($('<img />',{alt:"Next",src:$imageURL}));
 $nextLink.click(makeNextCallback(this._layout));
