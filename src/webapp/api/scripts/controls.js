@@ -150,6 +150,7 @@ Timegrid.Controls.Iterator.prototype.render = function(container) {
                    .addClass('timegrid-iterator-next')
                    .append($('<img />', {alt: "Next", src: $imageURL}));
     $nextLink.click(makeNextCallback(this._layout));
+    $prevLink.click(makePrevCallback(this._layout));
     this._div.append($prevLink);
     this._div.append($nextLink);
     this._div.append($('<span></span>', { text: this._layout.getCurrent() }));
