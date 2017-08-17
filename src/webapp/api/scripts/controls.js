@@ -93,10 +93,13 @@ Timegrid.Controls.TabSet.prototype.switchTo = function(title) {
         this._renderedLayouts[this.current].hide();
         this._tabs[this.current].removeClass('timegrid-tab-active'); 
     }
+
+    this.current = title;
     if (this._renderedLayouts[title]) {
         this._renderedLayouts[title].show();
     } else if (this._layoutMap[title]) {
         this._renderedLayouts[title] = $(this._layoutMap[title].render(this._container)).show();
+        this.renderChanged();
     }
     if (this._iDiv) { $(this._iDiv).empty(); }
     if (this._layoutMap[title].iterable) {
