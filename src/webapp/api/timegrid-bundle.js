@@ -1913,10 +1913,13 @@ if(this.current&&this._renderedLayouts[this.current]){
 this._renderedLayouts[this.current].hide();
 this._tabs[this.current].removeClass('timegrid-tab-active');
 }
+
+this.current=title;
 if(this._renderedLayouts[title]){
 this._renderedLayouts[title].show();
 }else if(this._layoutMap[title]){
 this._renderedLayouts[title]=$(this._layoutMap[title].render(this._container)).show();
+this.renderChanged();
 }
 if(this._iDiv){$(this._iDiv).empty();}
 if(this._layoutMap[title].iterable){
@@ -1966,6 +1969,7 @@ $nextLink=$('<a></a>',{href:undefined})
 .addClass('timegrid-iterator-next')
 .append($('<img />',{alt:"Next",src:$imageURL}));
 $nextLink.click(makeNextCallback(this._layout));
+$prevLink.click(makePrevCallback(this._layout));
 this._div.append($prevLink);
 this._div.append($nextLink);
 this._div.append($('<span></span>',{text:this._layout.getCurrent()}));

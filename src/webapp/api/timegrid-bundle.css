@@ -215,6 +215,7 @@ div.timegrid-month-cell {
     position: absolute;
     padding: 0;
     overflow: hidden;
+    border: 1px solid #e6e2af;
 }
 
 div.timegrid-month-cell-odd {
