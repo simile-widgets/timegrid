@@ -41,7 +41,7 @@ Timegrid.LayoutFactory.registerLayout = function(name, constructor) {
 Timegrid.LayoutFactory.createLayout = function(name, eventSource, params) {
     var constructor = Timegrid.LayoutFactory._constructors[name];
     if (typeof constructor == 'function') {
-        layout = new constructor(eventSource, $.clone(params));
+        layout = new constructor(eventSource, $.deepClone(params));
         return layout;
     } else {
         throw "No such layout!";   
@@ -162,7 +162,7 @@ Timegrid.Layout.prototype.render = function(container) {
     }
     if (container) {
         this._container = container;
-        this._viewDiv = $("<div></div>").addClass('timegrid-view')
+        this._viewDiv = $("<div media='print'></div>").addClass('timegrid-view print')
                                         .css('top', this.tabHeight + "px");
         $(this._container).append(this._viewDiv);
     } else { 
@@ -269,22 +269,46 @@ Timegrid.Layout.prototype.renderEvents = Timegrid.abstract("renderEvents");
  * @return {Element} a DOM element containing this layout's gridlines
  */
 Timegrid.Layout.prototype.renderGridlines = function() {
-    var gridlineContainer = document.createElement("div");
-    gridlineContainer.className = 'timegrid-gridlines';
+    var numToDay = {
+        0:  "S",
+        1:  "M",
+        2:  "T",
+        3:  "W",
+        4:  "R",
+        5:  "F",
+        6:  "S" 
+    };
+
+    var numToHour = {
+        0:  "8",
+        1:  "9",
+        2:  "10",
+        3:  "11",
+        4:  "12",
+        5:  "13",
+        6:  "14",
+        7:  "15",
+        8:  "16",
+        9:  "17",
+        10: "18",
+        11: "19",
+        12: "20",
+        13: "21"
+    };
     
-    for (var x = 0; x < this.xSize; x++) { // Vertical lines
-        var vlineDiv = document.createElement('div');
-        vlineDiv.className = 'timegrid-vline';
-        vlineDiv.style.height = this.gridheight + "px";
-        vlineDiv.style.left = x * this.xCell + "px";
-        gridlineContainer.appendChild(vlineDiv);
-    }
-    for (var y = 0; y <= this.ySize; y++) { // Horizontal lines
-        var hlineDiv = document.createElement('div');
-        hlineDiv.className = 'timegrid-hline';
-        hlineDiv.style.width = "100%";
-        hlineDiv.style.top = y * this.yCell + "px";
-        gridlineContainer.appendChild(hlineDiv);
+    var gridlineContainer = $("<table></table>", {class: 'timegrid-gridlines'});
+    
+    for (var y = 0; y <= this.ySize - 1; y++) { // Horizontal lines
+        var hlineDiv = $('<tr></tr>', { class:'timegrid-hline', 
+                                        height: this.yCell + "px"});
+        gridlineContainer.append(hlineDiv);
+                
+        for (var x = 0; x < this.xSize; x++) { // Vertical lines
+            var vlineDiv = $('<th></th>', { classid: numToDay[x] + numToHour[y],
+                                            class: 'timegrid-vline',
+                                            width: this.xCell + "px" });
+            hlineDiv.append(vlineDiv);
+        }
     }
     return gridlineContainer;
 };

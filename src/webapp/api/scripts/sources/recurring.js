@@ -88,10 +88,10 @@ Timegrid.RecurringEventSource.EventPrototype = function(dayArray, start, end,
     
     this.getID = function() { return id; }
     this.getText = function() { 
-        return SimileAjax.HTML.deEntify(text); 
+        return $('<div />').html(text).text();
     };
     this.getDescription = function() { 
-        return SimileAjax.HTML.deEntify(description); 
+        return $('<div />').html(text).text(); 
     };
     this.getImage = function() { 
         return (image != null && image != "") ? image : null;

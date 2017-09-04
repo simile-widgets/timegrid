@@ -9,7 +9,7 @@ Timegrid.abstract = function(name) {
     };
 };
 
-SimileAjax.DateTime.Interval = function(ms) {
+Timegrid.Interval = function(ms) {
     // Conversion factors as varants to eliminate all the multiplication
     var SECONDS_CF     = 1000;
     var MINUTES_CF     = 60000;          
@@ -40,8 +40,10 @@ SimileAjax.DateTime.Interval = function(ms) {
     // rounding errors!  
     this.centuries    = Math.round(this.milliseconds / CENTURIES_CF);  
     // rounding errors!
+
+    return this;
 };
 
-SimileAjax.DateTime.Interval.prototype.toString = function() {
+Timegrid.IntervaltoString = function() {
     return this.milliseconds.toString();
 };
